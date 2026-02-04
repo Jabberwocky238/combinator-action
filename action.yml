@@ -1,0 +1,24 @@
+name: 'Deploy Worker'
+description: '部署 Worker 到 Combinator 平台'
+inputs:
+  private-key:
+    description: '用于签名的私钥 (secret)'
+    required: true
+  user-id:
+    description: '用户 ID'
+    required: true
+  image:
+    description: 'Docker 镜像名称'
+    required: true
+  worker-id:
+    description: 'Worker ID'
+    required: true
+  port:
+    description: '容器端口'
+    required: true
+outputs:
+  response:
+    description: 'API 响应结果'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
