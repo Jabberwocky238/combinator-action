@@ -28030,7 +28030,7 @@ function error(message, properties = {}) {
 async function run() {
   try {
     // 1. 获取输入参数
-    const privateKey = getInput('private-key', { required: true });
+    const secretKey = getInput('secret-key', { required: true });
     const workerId = getInput('worker-id', { required: true });
     const userId = getInput('user-id', { required: true });
     const image = getInput('image', { required: true });
@@ -28044,10 +28044,12 @@ async function run() {
       port: parseInt(port, 10)
     });
 
-    // 3. 生成签名
-    const sign = crypto.createSign('RSA-SHA256');
-    sign.update(body);
-    const signature = sign.sign(privateKey, 'base64');
+    // 3. 生成 HMAC-SHA256 签名
+    const timestamp = Date.now().toString();
+    const payload = body + timestamp;
+    const signature = crypto.createHmac('sha256', secretKey)
+      .update(payload)
+      .digest('base64url');
 
     // 4. 发起 HTTPS 请求
     const response = await fetch('https://console.app238.com/worker', {
@@ -28055,7 +28057,8 @@ async function run() {
       headers: {
         'Content-Type': 'application/json',
         'X-Combinator-Signature': signature,
-        'X-Combinator-UserID': userId
+        'X-Combinator-User-ID': userId,
+        'X-Combinator-Timestamp': timestamp
       },
       body: body
     });

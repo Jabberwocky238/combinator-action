@@ -1,8 +1,8 @@
 name: 'Deploy Worker'
 description: '部署 Worker 到 Combinator 平台'
 inputs:
-  private-key:
-    description: '用于签名的私钥 (secret)'
+  secret-key:
+    description: '用于签名的密钥 (sk_xxx)'
     required: true
   user-id:
     description: '用户 ID'
