@@ -28033,7 +28033,7 @@ async function run() {
     const secretKey = getInput('secret-key', { required: true });
     const workerId = getInput('worker-id', { required: true });
     const userId = getInput('user-id', { required: true });
-    const image = getInput('image', { required: true });
+    const image = getInput('image', { required: true }).toLowerCase();
     const port = getInput('port', { required: true });
 
     // 2. 构建请求体

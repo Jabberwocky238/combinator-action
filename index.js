@@ -7,7 +7,7 @@ async function run() {
     const secretKey = core.getInput('secret-key', { required: true });
     const workerId = core.getInput('worker-id', { required: true });
     const userId = core.getInput('user-id', { required: true });
-    const image = core.getInput('image', { required: true });
+    const image = core.getInput('image', { required: true }).toLowerCase();
     const port = core.getInput('port', { required: true });
 
     // 2. 构建请求体
