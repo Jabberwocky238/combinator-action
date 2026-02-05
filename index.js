@@ -26,7 +26,7 @@ async function run() {
       .digest('base64url');
 
     // 4. 发起 HTTPS 请求
-    const response = await fetch('https://console.app238.com/worker', {
+    const response = await fetch('https://console.app238.com/api/worker', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
