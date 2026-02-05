@@ -6,7 +6,7 @@ GitHub Action for deploying workers to the Combinator platform.
 
 | Name | Description | Required |
 |------|-------------|----------|
-| `private-key` | RSA private key for signing requests | Yes |
+| `secret-key` | HMAC secret key for signing requests (sk_xxx) | Yes |
 | `user-id` | Your Combinator user ID | Yes |
 | `worker-id` | Unique identifier for the worker | Yes |
 | `image` | Docker image to deploy | Yes |
@@ -24,7 +24,7 @@ GitHub Action for deploying workers to the Combinator platform.
 - name: Deploy to Combinator
   uses: Jabberwocky238/combinator-action@main
   with:
-    private-key: ${{ secrets.COMBINATOR_PRIVATE_KEY }}
+    secret-key: ${{ secrets.COMBINATOR_SECRET_KEY }}
     user-id: ${{ secrets.COMBINATOR_USER_ID }}
     worker-id: my-worker
     image: ghcr.io/username/my-app:latest
@@ -34,9 +34,9 @@ GitHub Action for deploying workers to the Combinator platform.
 ## Setup
 
 1. Register at [console.app238.com](https://console.app238.com)
-2. Save your private key from registration
+2. Save your secret key from registration
 3. Add secrets to your repository:
-   - `COMBINATOR_PRIVATE_KEY`: Your RSA private key
+   - `COMBINATOR_SECRET_KEY`: Your secret key (sk_xxx)
    - `COMBINATOR_USER_ID`: Your user ID
 
 ## Example Workflow
@@ -96,7 +96,7 @@ jobs:
       - name: Deploy to Combinator
         uses: Jabberwocky238/combinator-action@main
         with:
-          private-key: ${{ secrets.COMBINATOR_PRIVATE_KEY }}
+          secret-key: ${{ secrets.COMBINATOR_SECRET_KEY }}
           user-id: ${{ secrets.COMBINATOR_USER_ID }}
           worker-id: my-app
           image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
