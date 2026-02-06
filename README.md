@@ -93,12 +93,15 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Set short SHA
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
       - name: Deploy to Combinator
         uses: Jabberwocky238/combinator-action@main
         with:
           secret-key: ${{ secrets.COMBINATOR_SECRET_KEY }}
           user-id: ${{ secrets.COMBINATOR_USER_ID }}
           worker-id: my-app
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
+          image: ${{ env.REGISTRY }}/${{ github.repository }}:sha-${{ env.SHORT_SHA }}
           port: 8080
 ```

@@ -13,7 +13,7 @@ async function run() {
     // 2. 构建请求体
     const body = JSON.stringify({
       worker_id: workerId,
-      owner_id: userId,
+      user_uid: userId,
       image: image,
       port: parseInt(port, 10)
     });
@@ -26,7 +26,7 @@ async function run() {
       .digest('base64url');
 
     // 4. 发起 HTTPS 请求
-    const response = await fetch('https://console.app238.com/api/worker', {
+    const response = await fetch('https://console.app238.com/api/worker/deploy', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
